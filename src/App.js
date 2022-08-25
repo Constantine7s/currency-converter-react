@@ -6,6 +6,15 @@ function App() {
   const [rates, setRates] = useState({});
   const [fromCurrency, setFromCurrency] = useState('JPY');
   const [toCurrency, setToCurrency] = useState('USD');
+  const [fromPirce, setFromPirce] = useState(0);
+  const [toPrice, setToPrice] = useState(0);
+
+  const onChangeFromPrice = (value) => {
+    setFromPirce(value);
+  };
+  const onChangeToPrice = (value) => {
+    setToPrice(value);
+  };
 
   useEffect(() => {
     axios
@@ -18,14 +27,17 @@ function App() {
   return (
     <div className="App">
       <Block
-        value={0}
+        value={fromPirce}
         currency={fromCurrency}
         onChangeCurr={(curr) => setFromCurrency(curr)}
+        onChangeVal={(val) => onChangeFromPrice(val)}
       />
       <Block
-        value={0}
+        value={toPrice}
         currency={toCurrency}
         onChangeCurr={(curr) => setToCurrency(curr)}
+        onChangeVal={(val) => onChangeToPrice(val)}
+
       />
     </div>
   );
