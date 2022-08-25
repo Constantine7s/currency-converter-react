@@ -10,9 +10,14 @@ function App() {
   const [toPrice, setToPrice] = useState(0);
 
   const onChangeFromPrice = (value) => {
+    const price = value / rates[fromCurrency]
+    const result = price * rates[toCurrency];
     setFromPirce(value);
+    setToPrice(result); 
   };
   const onChangeToPrice = (value) => {
+    const result = (rates[fromCurrency] / rates[toCurrency] * value)
+    setFromPirce(result);
     setToPrice(value);
   };
 
