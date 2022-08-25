@@ -6,20 +6,28 @@ function App() {
   const [rates, setRates] = useState({});
   const [fromCurrency, setFromCurrency] = useState('JPY');
   const [toCurrency, setToCurrency] = useState('USD');
-  const [fromPirce, setFromPirce] = useState(0);
+  const [fromPrice, setfromPrice] = useState(0);
   const [toPrice, setToPrice] = useState(0);
 
   const onChangeFromPrice = (value) => {
-    const price = value / rates[fromCurrency]
+    const price = value / rates[fromCurrency];
     const result = price * rates[toCurrency];
-    setFromPirce(value);
-    setToPrice(result); 
+    setfromPrice(value);
+    setToPrice(result);
   };
   const onChangeToPrice = (value) => {
-    const result = (rates[fromCurrency] / rates[toCurrency] * value)
-    setFromPirce(result);
+    const result = (rates[fromCurrency] / rates[toCurrency]) * value;
+    setfromPrice(result);
     setToPrice(value);
   };
+
+  useEffect(() => {
+    onChangeFromPrice(fromPrice);
+  }, [fromCurrency]);
+
+  useEffect(() => {
+    onChangeToPrice(toPrice);
+  }, [toCurrency]);
 
   useEffect(() => {
     axios
@@ -32,7 +40,7 @@ function App() {
   return (
     <div className="App">
       <Block
-        value={fromPirce}
+        value={fromPrice}
         currency={fromCurrency}
         onChangeCurr={(curr) => setFromCurrency(curr)}
         onChangeVal={(val) => onChangeFromPrice(val)}
@@ -42,7 +50,6 @@ function App() {
         currency={toCurrency}
         onChangeCurr={(curr) => setToCurrency(curr)}
         onChangeVal={(val) => onChangeToPrice(val)}
-
       />
     </div>
   );
