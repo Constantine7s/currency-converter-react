@@ -4,6 +4,8 @@ import axios from 'axios';
 
 function App() {
   const [rates, setRates] = useState({});
+  const [fromCurrency, setFromCurrency] = useState('JPY');
+  const [toCurrency, setToCurrency] = useState('USD');
 
   useEffect(() => {
     axios
@@ -17,10 +19,14 @@ function App() {
     <div className="App">
       <Block
         value={0}
-        currency="JPY"
-        onChangeCurr={(curr) => console.log(curr)}
+        currency={fromCurrency}
+        onChangeCurr={(curr) => setFromCurrency(curr)}
       />
-      <Block value={0} currency="USD" />
+      <Block
+        value={0}
+        currency={toCurrency}
+        onChangeCurr={(curr) => setToCurrency(curr)}
+      />
     </div>
   );
 }

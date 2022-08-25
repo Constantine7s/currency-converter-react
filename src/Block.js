@@ -5,7 +5,7 @@ export const Block = ({ value, currency, onChangeVal, onChangeCurr }) => (
   <div className="block">
     <ul className="currencies">
       {defaultCurrencies.map((curr) => (
-        <li onClick={() => onChangeCurr(curr)} key={curr}>
+        <li onClick={() => onChangeCurr(curr)} key={curr}  className={currency === curr ? 'active' : ''}>
           {curr}
         </li>
       ))}
